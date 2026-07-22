@@ -1,5 +1,18 @@
 # @assistant-ui/react-langgraph
 
+## 0.14.13
+
+### Patch Changes
+
+- [#5099](https://github.com/assistant-ui/assistant-ui/pull/5099) [`f577ba5`](https://github.com/assistant-ui/assistant-ui/commit/f577ba574de604ae9509a1cc35cb54364a726241) - fix: carry streamed tool-call `partial_json` onto the full `AIMessage` delivered by LangGraph `updates` events so the converter keeps deriving `argsText` from the streamed text instead of re-stringifying parsed args. ([@rupic-app](https://github.com/apps/rupic-app))
+
+- [#5080](https://github.com/assistant-ui/assistant-ui/pull/5080) [`b41ee01`](https://github.com/assistant-ui/assistant-ui/commit/b41ee011ea3e02a68eaafcbd5e20670625cf9043) - fix: preserve streamed Bedrock tool call arguments ([@Kinfe123](https://github.com/Kinfe123))
+
+- Updated dependencies [[`79034bb`](https://github.com/assistant-ui/assistant-ui/commit/79034bbfe8da82c3739969bf7b4cc744910d203a), [`b17d392`](https://github.com/assistant-ui/assistant-ui/commit/b17d3929d785cb418615d18b739fb9e3b7b53728), [`20643e2`](https://github.com/assistant-ui/assistant-ui/commit/20643e299a3d9eeb73d73dca72d4b70220f4dc0b), [`7fde141`](https://github.com/assistant-ui/assistant-ui/commit/7fde141c094d122034804f9b9e19b4f17fb516ba), [`19cfdcd`](https://github.com/assistant-ui/assistant-ui/commit/19cfdcdfdc6778a3ed3f607f694787fe1ef54612), [`5e4dd9f`](https://github.com/assistant-ui/assistant-ui/commit/5e4dd9fd00161fd79df60821d2b9af0cd7ebcefd), [`85d4976`](https://github.com/assistant-ui/assistant-ui/commit/85d49764ca3585fc553257dafa00a47830727e36), [`5135400`](https://github.com/assistant-ui/assistant-ui/commit/5135400d054297889312b9ae03fe803443ee2fae), [`ca80153`](https://github.com/assistant-ui/assistant-ui/commit/ca801537e02bbab09532d0f505992778d282dddb), [`9a343db`](https://github.com/assistant-ui/assistant-ui/commit/9a343db871ceab7e574bfcec9ab22af0ddaf1841), [`c1b1750`](https://github.com/assistant-ui/assistant-ui/commit/c1b175040e49ecb82b43d2713536aef7a1f2300e)]:
+  - @assistant-ui/core@0.2.22
+  - assistant-cloud@0.1.36
+  - assistant-stream@0.3.27
+
 ## 0.14.12
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @assistant-ui/react
 
+## 0.14.28
+
+### Patch Changes
+
+- [#5059](https://github.com/assistant-ui/assistant-ui/pull/5059) [`fd83a3a`](https://github.com/assistant-ui/assistant-ui/commit/fd83a3a366f5a890e44d915f118daea5f9a97370) - fix: prevent instant auto-scroll from interrupting active top-anchored runs ([@Gujiassh](https://github.com/Gujiassh))
+
+- [#5083](https://github.com/assistant-ui/assistant-ui/pull/5083) [`cbe5f4e`](https://github.com/assistant-ui/assistant-ui/commit/cbe5f4ed927fa35c8f61455172fe7956c867e459) - feat: focus composer input when clicking blank space in ComposerPrimitive.Root ([@AVGVSTVS96](https://github.com/AVGVSTVS96))
+
+- Updated dependencies [[`79034bb`](https://github.com/assistant-ui/assistant-ui/commit/79034bbfe8da82c3739969bf7b4cc744910d203a), [`b17d392`](https://github.com/assistant-ui/assistant-ui/commit/b17d3929d785cb418615d18b739fb9e3b7b53728), [`7492368`](https://github.com/assistant-ui/assistant-ui/commit/7492368638500f23f4baf9c62d730b479a5f4978), [`20643e2`](https://github.com/assistant-ui/assistant-ui/commit/20643e299a3d9eeb73d73dca72d4b70220f4dc0b), [`7fde141`](https://github.com/assistant-ui/assistant-ui/commit/7fde141c094d122034804f9b9e19b4f17fb516ba), [`19cfdcd`](https://github.com/assistant-ui/assistant-ui/commit/19cfdcdfdc6778a3ed3f607f694787fe1ef54612), [`5e4dd9f`](https://github.com/assistant-ui/assistant-ui/commit/5e4dd9fd00161fd79df60821d2b9af0cd7ebcefd), [`85d4976`](https://github.com/assistant-ui/assistant-ui/commit/85d49764ca3585fc553257dafa00a47830727e36), [`5135400`](https://github.com/assistant-ui/assistant-ui/commit/5135400d054297889312b9ae03fe803443ee2fae), [`ca80153`](https://github.com/assistant-ui/assistant-ui/commit/ca801537e02bbab09532d0f505992778d282dddb), [`9a343db`](https://github.com/assistant-ui/assistant-ui/commit/9a343db871ceab7e574bfcec9ab22af0ddaf1841), [`c1b1750`](https://github.com/assistant-ui/assistant-ui/commit/c1b175040e49ecb82b43d2713536aef7a1f2300e)]:
+  - @assistant-ui/core@0.2.22
+  - safe-content-frame@0.0.24
+  - assistant-cloud@0.1.36
+  - assistant-stream@0.3.27
+
 ## 0.14.27
 
 ### Patch Changes
