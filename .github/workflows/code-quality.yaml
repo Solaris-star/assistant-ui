@@ -15,6 +15,9 @@ on:
       - "scripts/check-built-declarations.test.mjs"
       - "scripts/check-workspace-ranges.mjs"
       - "scripts/check-workspace-ranges.test.mjs"
+      - "scripts/update-deps.sh"
+      - "scripts/update-deps.test.mjs"
+      - "scripts/generate-deps-changeset.sh"
       - "scripts/lib/script-options.mjs"
       - "scripts/sync-templates.sh"
       - "turbo.json"
@@ -36,6 +39,9 @@ on:
       - "scripts/check-built-declarations.test.mjs"
       - "scripts/check-workspace-ranges.mjs"
       - "scripts/check-workspace-ranges.test.mjs"
+      - "scripts/update-deps.sh"
+      - "scripts/update-deps.test.mjs"
+      - "scripts/generate-deps-changeset.sh"
       - "scripts/lib/script-options.mjs"
       - "scripts/sync-templates.sh"
       - "turbo.json"
@@ -116,6 +122,9 @@ jobs:
         with:
           runtime: node@24
           install: false
+
+      - name: Test the dependency updater
+        run: node --test scripts/update-deps.test.mjs
 
       - name: Test the workspace range checker
         run: node --test scripts/check-workspace-ranges.test.mjs
