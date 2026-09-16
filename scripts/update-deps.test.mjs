@@ -20,8 +20,8 @@ function writeExecutable(file, source) {
   chmodSync(file, 0o755);
 }
 
-for (const failureStage of ["install", "expo-repin"]) {
-  test(`${failureStage} failure restores React Native dependencies without reverting unrelated taze updates`, () => {
+for (const failureStage of ["install", "expo-repin", "none"]) {
+  test(`${failureStage} preserves the expected Expo-managed dependency versions`, () => {
     const root = mkdtempSync(path.join(tmpdir(), "aui-update-deps-"));
     const bin = path.join(root, "bin");
     const manifestPath = path.join(
@@ -34,6 +34,7 @@ for (const failureStage of ["install", "expo-repin"]) {
     try {
       mkdirSync(path.dirname(manifestPath), { recursive: true });
       mkdirSync(path.join(root, "scripts"), { recursive: true });
+      mkdirSync(path.join(root, "node_modules", "expo"), { recursive: true });
       mkdirSync(bin);
       cpSync(
         path.join(repoRoot, "scripts", "update-deps.sh"),
@@ -46,6 +47,7 @@ for (const failureStage of ["install", "expo-repin"]) {
           {
             dependencies: {
               "expo-clipboard": "~54.0.7",
+              "@react-native/virtualized-lists": "0.81.5",
               "react-native": "0.81.5",
               "unrelated-package": "1.0.0",
             },
@@ -53,6 +55,14 @@ for (const failureStage of ["install", "expo-repin"]) {
           null,
           2,
         ) + "\n",
+      );
+      writeFileSync(
+        path.join(root, "node_modules", "expo", "bundledNativeModules.json"),
+        JSON.stringify({
+          "@react-native/virtualized-lists": "0.81.5",
+          "expo-clipboard": "~54.0.7",
+          "react-native": "0.81.5",
+        }),
       );
 
       writeFileSync(path.join(root, "package.json"), "{}\n");
@@ -74,6 +84,7 @@ node -e '
   const file = "examples/with-expo/package.json";
   const manifest = JSON.parse(fs.readFileSync(file, "utf8"));
   manifest.dependencies["expo-clipboard"] = "~55.0.0";
+  manifest.dependencies["@react-native/virtualized-lists"] = "0.82.0";
   manifest.dependencies["react-native"] = "0.82.0";
   manifest.dependencies["unrelated-package"] = "2.0.0";
   fs.writeFileSync(file, JSON.stringify(manifest, null, 2) + "\\n");
@@ -115,14 +126,29 @@ printf 'package.json\\0examples/with-expo/package.json\\0'
         },
       );
 
-      assert.equal(result.status, 1, result.stderr);
-      assert.match(result.stderr, /The Expo repin did not run/);
       const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
-      assert.deepEqual(manifest.dependencies, {
-        "expo-clipboard": "~54.0.7",
-        "react-native": "0.81.5",
-        "unrelated-package": "2.0.0",
-      });
+      if (failureStage === "none") {
+        assert.equal(result.status, 0, result.stderr);
+        assert.doesNotMatch(result.stderr, /The Expo repin did not run/);
+        assert.equal(manifest.dependencies["react-native"], "0.82.0");
+        assert.equal(
+          manifest.dependencies["@react-native/virtualized-lists"],
+          "0.82.0",
+        );
+      } else {
+        assert.equal(result.status, 1, result.stderr);
+        assert.match(result.stderr, /The Expo repin did not run/);
+        assert.equal(manifest.dependencies["react-native"], "0.81.5");
+        assert.equal(
+          manifest.dependencies["@react-native/virtualized-lists"],
+          "0.81.5",
+        );
+      }
+      assert.equal(
+        manifest.dependencies["expo-clipboard"],
+        failureStage === "none" ? "~55.0.0" : "~54.0.7",
+      );
+      assert.equal(manifest.dependencies["unrelated-package"], "2.0.0");
     } finally {
       rmSync(root, { recursive: true, force: true });
     }
